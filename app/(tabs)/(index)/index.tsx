@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import { colors } from "@/constants/Colors";
 import Heading from "@/components/ui/Heading";
 import ShiftList from "@/components/ui/ShiftList";
@@ -199,7 +199,7 @@ export default function Index() {
 					<ShiftList data={mockData} />
 				</View>
 				<View style={styles.buttonContainer}>
-					<GoToCalendarButton onPress={() => console.log("test")} />
+					<GoToCalendarButton />
 				</View>
 			</SafeAreaView>
 		</SafeAreaProvider>

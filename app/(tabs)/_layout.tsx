@@ -1,7 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import { colors } from "@/constants/Colors";
-import { StatusBar } from "expo-status-bar";
 import { StyleSheet } from "react-native";
 
 export default function TabLayout() {
@@ -17,7 +16,7 @@ export default function TabLayout() {
 			}}
 		>
 			<Tabs.Screen
-				name="index"
+				name="(index)"
 				options={{
 					headerShown: false,
 					tabBarShowLabel: false,

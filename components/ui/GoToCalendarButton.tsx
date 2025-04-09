@@ -1,26 +1,23 @@
 import { Text, TouchableOpacity, StyleSheet } from "react-native";
 import { colors } from "@/constants/Colors";
 import { Feather } from "@expo/vector-icons";
+import { Link } from "expo-router";
 
-type Props = {
-	onPress: () => void;
-};
-
-const GoToCalendarButton = ({ onPress }: Props) => {
+export default function GoToCalendarButton() {
 	return (
-		<TouchableOpacity onPress={onPress} style={styles.button}>
+		<TouchableOpacity style={styles.button}>
 			<Feather
 				name="calendar"
 				size={16}
 				color={colors.black}
 				style={styles.icon}
 			/>
-			<Text style={styles.text}>PRZEJDŹ DO KALENDARZA</Text>
+			<Link href={"/calendar"}>
+				<Text style={styles.text}>PRZEJDŹ DO KALENDARZA</Text>
+			</Link>
 		</TouchableOpacity>
 	);
-};
-
-export default GoToCalendarButton;
+}
 
 const styles = StyleSheet.create({
 	text: {
