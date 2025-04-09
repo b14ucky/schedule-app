@@ -16,7 +16,6 @@ export default function TabLayout() {
 				},
 			}}
 		>
-			<StatusBar style="dark" />
 			<Tabs.Screen
 				name="index"
 				options={{
