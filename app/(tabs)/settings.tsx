@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from "react-native";
 import { colors } from "@/constants/Colors";
 
-export default function Index() {
+export default function Settings() {
 	return (
 		<View style={styles.container}>
-			<Text>Hello world!</Text>
+			<Text>Settings...</Text>
 		</View>
 	);
 }
