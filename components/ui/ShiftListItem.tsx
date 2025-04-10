@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
 	},
 	shiftHours: {
 		fontSize: 16,
-		color: colors.gray,
+		color: colors.darkGray,
 		marginTop: 2,
 	},
 });
