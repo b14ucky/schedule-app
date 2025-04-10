@@ -193,7 +193,9 @@ export default function Index() {
 	return (
 		<SafeAreaProvider>
 			<SafeAreaView style={styles.container}>
-				<Link
+				{/* Leaving this here for debugging in the future */}
+
+				{/* <Link
 					href={"/login"}
 					style={{
 						position: "absolute",
@@ -205,7 +207,7 @@ export default function Index() {
 					}}
 				>
 					Klik
-				</Link>
+				</Link> */}
 				<View style={styles.headingContainer}>
 					<Heading>TWÓJ GRAFIK</Heading>
 				</View>

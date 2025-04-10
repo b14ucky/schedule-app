@@ -10,6 +10,7 @@ import { useState } from "react";
 import { StyleSheet, View, KeyboardAvoidingView, Platform } from "react-native";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import * as SecureStore from "expo-secure-store";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function LoginScreen() {
 	const [email, setEmail] = useState("");
@@ -17,26 +18,31 @@ export default function LoginScreen() {
 	const [error, setError] = useState<string | null>(null);
 	const router = useRouter();
 
+	const { login } = useAuth();
+
 	const handleLogin = async () => {
 		try {
-			const response = await axios.post("lcoalhost", {
-				email,
-				password,
-			});
+			// todo after implementing an API for logging in
 
-			await SecureStore.setItemAsync(
-				"access_token",
-				response.data.access
-			);
-			await SecureStore.setItemAsync(
-				"refresh_token",
-				response.data.refresh
-			);
+			// const response = await axios.post("localhost", {
+			// 	email,
+			// 	password,
+			// });
 
-			router.push("/(tabs)/(index)");
+			await login("test");
+
+			// await SecureStore.setItemAsync(
+			// 	"access_token",
+			//	response.data.access
+			// );
+			// await SecureStore.setItemAsync(
+			// 	"refresh_token",
+			// 	response.data.refresh
+			// );
+
+			router.replace("/");
 		} catch (err) {
 			setError(`Error: ${err}`);
-			console.log(error);
 		}
 	};
 
