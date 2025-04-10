@@ -64,6 +64,7 @@ export default function CalendarComponent() {
 					<RNCalendar
 						theme={{
 							calendarBackground: "transparent",
+							arrowColor: colors.teal,
 						}}
 						firstDay={1}
 						enableSwipeMonths={true}
