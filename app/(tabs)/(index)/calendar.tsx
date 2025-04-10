@@ -6,7 +6,8 @@ import CalendarHeader from "@/components/ui/CalendarHeader";
 import CalendarDay from "@/components/ui/CalendarDay";
 import Heading from "@/components/ui/Heading";
 import { router } from "expo-router";
-import { Ionicons } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
+import { shadows } from "@/constants/Shadows";
 
 type dayProps = {
 	date: any;
@@ -47,13 +48,13 @@ export default function CalendarComponent() {
 	return (
 		<SafeAreaProvider>
 			<SafeAreaView style={styles.container}>
-				<View style={styles.header}>
+				<View style={[styles.header, shadows.lightShadow]}>
 					<TouchableOpacity
 						style={styles.backButton}
 						onPress={() => router.back()}
 					>
-						<Ionicons
-							name="arrow-back"
+						<Feather
+							name="chevron-left"
 							size={24}
 							color={colors.black}
 						/>
@@ -72,7 +73,10 @@ export default function CalendarComponent() {
 						renderHeader={(date: any) => {
 							return <CalendarHeader date={date} />;
 						}}
-						headerStyle={styles.calendarHeader}
+						headerStyle={[
+							styles.calendarHeader,
+							shadows.lightShadow,
+						]}
 						dayComponent={({ date, state }: dayProps) => {
 							const isToday =
 								date.dateString ===
@@ -117,6 +121,7 @@ const styles = StyleSheet.create({
 	calendarHeader: {
 		backgroundColor: colors.white,
 		borderRadius: 10,
+		marginBottom: 15,
 	},
 	backButton: {
 		position: "absolute",

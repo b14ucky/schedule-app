@@ -28,7 +28,7 @@ export default function Button({
 		<TouchableOpacity
 			style={[
 				styles.baseButton,
-				shadows.heavierShadow,
+				shadows.heavier2Shadow,
 				buttonProps ? buttonProps.style : {},
 			]}
 		>

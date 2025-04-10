@@ -25,7 +25,7 @@ export default function ShiftList({ data }: Props) {
 					shiftHours={item.shiftHours}
 				/>
 			)}
-			ItemSeparatorComponent={() => <View style={styles.separator} />}
+			// ItemSeparatorComponent={() => <View style={styles.separator} />}
 			contentContainerStyle={styles.container}
 		/>
 	);
@@ -34,6 +34,7 @@ export default function ShiftList({ data }: Props) {
 const styles = StyleSheet.create({
 	container: {
 		paddingVertical: 10,
+		alignItems: "center",
 	},
 	separator: {
 		height: 10,
