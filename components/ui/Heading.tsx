@@ -22,5 +22,6 @@ export default function Heading({ level = 1, style, ...props }: HeadingProps) {
 const styles = StyleSheet.create({
 	base: {
 		fontWeight: 900,
+		textAlign: "center",
 	},
 });
