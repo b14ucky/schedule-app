@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { colors } from "@/constants/Colors";
+import { shadows } from "@/constants/Shadows";
 
 type Props = {
 	dayOfMonth: number;
@@ -14,7 +15,7 @@ export default function ShiftListItem({
 	shiftHours,
 }: Props) {
 	return (
-		<TouchableOpacity style={styles.container}>
+		<TouchableOpacity style={[styles.container, shadows.heavier2Shadow]}>
 			<View style={styles.dateContainer}>
 				<Text style={styles.dayOfMonth}>{dayOfMonth}</Text>
 			</View>
@@ -30,17 +31,19 @@ const styles = StyleSheet.create({
 	container: {
 		flexDirection: "row",
 		paddingVertical: 12,
-		paddingHorizontal: 16,
+		paddingHorizontal: 26,
 		alignItems: "center",
 		backgroundColor: colors.teal,
-		borderRadius: 10,
+		borderRadius: 20,
+		width: "90%",
+		marginBottom: 15,
 	},
 	dateContainer: {
 		width: 55,
 		height: 55,
 		borderColor: colors.whiteish,
-		borderWidth: 2,
-		borderRadius: 3,
+		borderWidth: 3,
+		borderRadius: 5,
 		justifyContent: "center",
 		alignItems: "center",
 		marginRight: 16,

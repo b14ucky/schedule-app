@@ -214,10 +214,11 @@ const styles = StyleSheet.create({
 	},
 	headingContainer: {
 		padding: 15,
+		width: "100%",
 	},
 	mainContainer: {
 		flex: 1,
-		width: "95%",
+		width: "100%",
 	},
 	buttonContainer: {
 		height: 50,

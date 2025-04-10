@@ -15,4 +15,11 @@ export const shadows = {
 		shadowRadius: 6,
 		elevation: 6,
 	},
+	heavier2Shadow: {
+		shadowColor: colors.black,
+		shadowOffset: { width: 0, height: 2 },
+		shadowOpacity: 0.53,
+		shadowRadius: 4,
+		elevation: 3,
+	},
 };
