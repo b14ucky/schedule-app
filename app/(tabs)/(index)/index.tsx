@@ -4,6 +4,7 @@ import Heading from "@/components/ui/Heading";
 import ShiftList from "@/components/ui/ShiftList";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import GoToCalendarButton from "@/components/ui/GoToCalendarButton";
+import { Link } from "expo-router";
 
 export default function Index() {
 	const mockData = [
@@ -192,6 +193,21 @@ export default function Index() {
 	return (
 		<SafeAreaProvider>
 			<SafeAreaView style={styles.container}>
+				{/* Leaving this here for debugging in the future */}
+
+				{/* <Link
+					href={"/login"}
+					style={{
+						position: "absolute",
+						top: "7%",
+						backgroundColor: "red",
+						zIndex: 1000,
+						fontSize: 20,
+						padding: 20,
+					}}
+				>
+					Klik
+				</Link> */}
 				<View style={styles.headingContainer}>
 					<Heading>TWÓJ GRAFIK</Heading>
 				</View>

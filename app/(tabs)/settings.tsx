@@ -7,8 +7,10 @@ import Button from "@/components/ui/Button";
 import Constants from "expo-constants";
 import SettingsItem from "@/components/ui/SettingsItem";
 import { shadows } from "@/constants/Shadows";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function Settings() {
+	const { logout } = useAuth();
 	return (
 		<SafeAreaProvider>
 			<SafeAreaView style={styles.container}>
@@ -40,6 +42,7 @@ export default function Settings() {
 						buttonProps={{
 							style: { marginTop: 25 },
 						}}
+						onPress={() => logout()}
 					/>
 					<Text style={styles.version}>
 						Wersja: {Constants.expoConfig?.version || "błąd"}

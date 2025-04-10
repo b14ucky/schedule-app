@@ -15,6 +15,7 @@ type Props = {
 	iconName?: string;
 	textProps?: TextProps;
 	buttonProps?: TouchableOpacityProps;
+	onPress?: () => void;
 };
 
 export default function Button({
@@ -23,9 +24,11 @@ export default function Button({
 	iconName,
 	textProps,
 	buttonProps,
+	onPress,
 }: Props) {
 	return (
 		<TouchableOpacity
+			onPress={onPress}
 			style={[
 				styles.baseButton,
 				shadows.heavier2Shadow,
