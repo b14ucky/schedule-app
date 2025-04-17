@@ -4,16 +4,48 @@ import { colors } from "@/constants/Colors";
 import { shadows } from "@/constants/Shadows";
 
 type Props = {
-	dayOfMonth: number;
-	dayOfWeek: string;
-	shiftHours: string;
+	date: string;
+	time_start: string | null;
+	time_end: string | null;
+	day_type: string | null;
+	additional_info: string | null;
 };
 
 export default function ShiftListItem({
-	dayOfMonth,
-	dayOfWeek,
-	shiftHours,
+	date,
+	time_start,
+	time_end,
+	day_type,
+	additional_info,
 }: Props) {
+	const daysOfWeek = [
+		"Niedziela",
+		"Poniedziałek",
+		"Wtorek",
+		"Środa",
+		"Czwartek",
+		"Piątek",
+		"Sobota",
+	];
+
+	const dateObject = new Date(date);
+	const dayOfMonth = dateObject.getDate();
+	const dayOfWeek = daysOfWeek[dateObject.getDay()];
+
+	const shiftHours =
+		time_start && time_end
+			? // time is in format HH:MM:SS so I split on ':' and limit
+			  // the size of the array to 2 so that I end up with [HH, MM]
+			  // which I can then join with ':' to get HH:MM
+			  `${time_start.split(":", 2).join(":")} - ${time_end
+					.split(":", 2)
+					.join(":")}`
+			: day_type
+			? day_type
+			: additional_info
+			? additional_info
+			: "";
+
 	return (
 		<TouchableOpacity style={[styles.container, shadows.heavier2Shadow]}>
 			<View style={styles.dateContainer}>
