@@ -5,10 +5,24 @@ type Props = {
 	day: any;
 	isDisabled: boolean;
 	isToday: boolean;
+	marking?: any;
 };
 
-export default function CalendarDay({ day, isDisabled, isToday }: Props) {
+export default function CalendarDay({
+	day,
+	isDisabled,
+	isToday,
+	marking,
+}: Props) {
 	const color = isToday ? colors.teal : colors.grayish;
+	const markingColor = marking
+		? marking.dayType === "WORK"
+			? colors.darkerGreen
+			: marking.dayType === "VACATION"
+			? colors.teal
+			: "transparent"
+		: "transparent";
+
 	return (
 		<View
 			style={[
@@ -22,7 +36,14 @@ export default function CalendarDay({ day, isDisabled, isToday }: Props) {
 			<Text
 				style={[
 					styles.text,
-					{ color: color, fontWeight: isToday ? 700 : 200 },
+					{
+						color:
+							markingColor !== "transparent"
+								? colors.white
+								: color,
+						fontWeight: isToday ? 700 : 200,
+						backgroundColor: markingColor,
+					},
 				]}
 			>
 				{day}
@@ -43,6 +64,12 @@ const styles = StyleSheet.create({
 		borderRadius: 3,
 	},
 	text: {
+		textAlign: "center",
+		lineHeight: 30,
 		fontSize: 18,
+		width: 30,
+		aspectRatio: 1,
+
+		borderRadius: 100,
 	},
 });
