@@ -58,7 +58,7 @@ export default function Index() {
 
 	return (
 		<SafeAreaProvider>
-			<SafeAreaView style={{ flex: 1 }}>
+			<SafeAreaView style={{ flex: 1, backgroundColor: colors.whiteish }}>
 				<GestureHandlerRootView style={styles.container}>
 					<View style={styles.headingContainer}>
 						<Heading>TWÓJ GRAFIK</Heading>
