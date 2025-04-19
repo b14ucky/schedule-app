@@ -9,6 +9,7 @@ type Props = {
 	time_end: string | null;
 	day_type: string | null;
 	additional_info: string | null;
+	onPress: () => void;
 };
 
 export default function ShiftListItem({
@@ -17,6 +18,7 @@ export default function ShiftListItem({
 	time_end,
 	day_type,
 	additional_info,
+	onPress,
 }: Props) {
 	const daysOfWeek = [
 		"Niedziela",
@@ -47,7 +49,10 @@ export default function ShiftListItem({
 			: "";
 
 	return (
-		<TouchableOpacity style={[styles.container, shadows.heavier2Shadow]}>
+		<TouchableOpacity
+			onPress={onPress}
+			style={[styles.container, shadows.heavier2Shadow]}
+		>
 			<View style={styles.dateContainer}>
 				<Text style={styles.dayOfMonth}>{dayOfMonth}</Text>
 			</View>

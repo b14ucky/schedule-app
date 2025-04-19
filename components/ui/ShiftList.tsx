@@ -1,25 +1,24 @@
 import React from "react";
 import { View, FlatList, StyleSheet } from "react-native";
 import ListElement from "./ShiftListItem";
-
-type Shift = {
-	id: number;
-	date: string;
-	time_start: string | null;
-	time_end: string | null;
-	day_type: string | null;
-	additional_info: string | null;
-};
+import { Shift } from "@/components/ui/ShiftDetails";
 
 type Props = {
 	data: Shift[];
 	onRefresh: () => void;
 	refreshing: boolean;
+	onPress: (item: Shift) => void;
 };
 
-export default function ShiftList({ data, onRefresh, refreshing }: Props) {
+export default function ShiftList({
+	data,
+	onRefresh,
+	refreshing,
+	onPress,
+}: Props) {
 	return (
 		<FlatList
+			showsVerticalScrollIndicator={false}
 			data={data}
 			onRefresh={onRefresh}
 			refreshing={refreshing}
@@ -31,6 +30,7 @@ export default function ShiftList({ data, onRefresh, refreshing }: Props) {
 					time_end={item.time_end}
 					day_type={item.day_type}
 					additional_info={item.additional_info}
+					onPress={() => onPress(item)}
 				/>
 			)}
 			contentContainerStyle={styles.container}

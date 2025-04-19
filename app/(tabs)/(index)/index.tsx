@@ -4,8 +4,13 @@ import Heading from "@/components/ui/Heading";
 import ShiftList from "@/components/ui/ShiftList";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import GoToCalendarButton from "@/components/ui/GoToCalendarButton";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import api from "@/lib/api";
+import ShiftDetails, {
+	ShiftDetailsRef,
+	Shift,
+} from "@/components/ui/ShiftDetails";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function Index() {
 	type ResponseData = {
@@ -21,6 +26,12 @@ export default function Index() {
 	const [isLoading, setIsLoading] = useState(true);
 	const [isRefreshing, setIsRefreshing] = useState(true);
 	const [error, setError] = useState<string | null>(null);
+
+	const shiftDetailsRef = useRef<ShiftDetailsRef>(null);
+	const handlePress = (shift: Shift) => {
+		console.log("test");
+		shiftDetailsRef.current?.open(shift);
+	};
 
 	const getSchedule = async () => {
 		setIsRefreshing(true);
@@ -47,24 +58,28 @@ export default function Index() {
 
 	return (
 		<SafeAreaProvider>
-			<SafeAreaView style={styles.container}>
-				<View style={styles.headingContainer}>
-					<Heading>TWÓJ GRAFIK</Heading>
-				</View>
-				<View style={styles.mainContainer}>
-					{isLoading ? (
-						<ActivityIndicator size="large" />
-					) : (
-						<ShiftList
-							data={schedule}
-							onRefresh={getSchedule}
-							refreshing={isRefreshing}
-						/>
-					)}
-				</View>
-				<View style={styles.buttonContainer}>
-					<GoToCalendarButton />
-				</View>
+			<SafeAreaView style={{ flex: 1 }}>
+				<GestureHandlerRootView style={styles.container}>
+					<View style={styles.headingContainer}>
+						<Heading>TWÓJ GRAFIK</Heading>
+					</View>
+					<View style={styles.mainContainer}>
+						{isLoading ? (
+							<ActivityIndicator size="large" />
+						) : (
+							<ShiftList
+								data={schedule}
+								onRefresh={getSchedule}
+								refreshing={isRefreshing}
+								onPress={handlePress}
+							/>
+						)}
+					</View>
+					<View style={styles.buttonContainer}>
+						<GoToCalendarButton />
+					</View>
+					<ShiftDetails ref={shiftDetailsRef} />
+				</GestureHandlerRootView>
 			</SafeAreaView>
 		</SafeAreaProvider>
 	);
