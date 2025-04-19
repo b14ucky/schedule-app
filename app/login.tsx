@@ -34,7 +34,6 @@ export default function LoginScreen() {
 			router.replace("/");
 		} catch (err) {
 			setError(`Error: ${err}`);
-			console.log(error);
 		}
 	};
 
