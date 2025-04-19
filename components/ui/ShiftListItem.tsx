@@ -34,19 +34,44 @@ export default function ShiftListItem({
 	const dayOfMonth = dateObject.getDate();
 	const dayOfWeek = daysOfWeek[dateObject.getDay()];
 
-	const shiftHours =
-		time_start && time_end
-			? // time is in format HH:MM:SS so I split on ':' and limit
-			  // the size of the array to 2 so that I end up with [HH, MM]
-			  // which I can then join with ':' to get HH:MM
-			  `${time_start.split(":", 2).join(":")} - ${time_end
-					.split(":", 2)
-					.join(":")}`
-			: day_type
-			? day_type
-			: additional_info
-			? additional_info
-			: "";
+	let dayType = null;
+
+	switch (day_type) {
+		case "WORK":
+			dayType = "Praca";
+			break;
+		case "VACATION":
+			dayType = "Urlop";
+			break;
+		case "SICK_LEAVE":
+			dayType = "L4";
+			break;
+		case "NON_WORKING_DAY":
+			dayType = "Dzień wolny (grafik)";
+			break;
+		case "AVAILABILITY_OFF":
+			dayType = "Dzień wolny (niedyspozycyjność)";
+			break;
+		case "REQUESTED_OFF":
+			dayType = "Wolne na prośbę";
+			break;
+	}
+
+	// additional info is the default case
+	// if day type is "WORK" and shift hours were provided - they will be displayed
+	// in other cases day type (if provided) will be displayed
+	let shiftInfo = additional_info;
+
+	if (time_start && time_end && day_type === "WORK") {
+		// time is in format HH:MM:SS so I split on ':' and limit
+		// the size of the array to 2 so that I end up with [HH, MM]
+		// which I can then join with ':' to get HH:MM
+		shiftInfo = `${time_start.split(":", 2).join(":")} - ${time_end
+			.split(":", 2)
+			.join(":")}`;
+	} else if (dayType) {
+		shiftInfo = dayType;
+	}
 
 	return (
 		<TouchableOpacity
@@ -58,7 +83,7 @@ export default function ShiftListItem({
 			</View>
 			<View style={styles.infoContainer}>
 				<Text style={styles.dayOfWeek}>{dayOfWeek}</Text>
-				<Text style={styles.shiftHours}>{shiftHours}</Text>
+				<Text style={styles.shiftInfo}>{shiftInfo}</Text>
 			</View>
 		</TouchableOpacity>
 	);
@@ -99,7 +124,7 @@ const styles = StyleSheet.create({
 		fontWeight: "600",
 		color: colors.black,
 	},
-	shiftHours: {
+	shiftInfo: {
 		fontSize: 16,
 		color: colors.darkGray,
 		marginTop: 2,
