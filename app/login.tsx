@@ -9,7 +9,6 @@ import { useRouter } from "expo-router";
 import { useState } from "react";
 import { StyleSheet, View, KeyboardAvoidingView, Platform } from "react-native";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
-import * as SecureStore from "expo-secure-store";
 import { useAuth } from "@/contexts/AuthContext";
 
 export default function LoginScreen() {
@@ -22,23 +21,15 @@ export default function LoginScreen() {
 
 	const handleLogin = async () => {
 		try {
-			// todo after implementing an API for logging in
+			const response = await axios.post(
+				"http://192.168.0.166:8000/auth/token/",
+				{
+					email,
+					password,
+				}
+			);
 
-			// const response = await axios.post("localhost", {
-			// 	email,
-			// 	password,
-			// });
-
-			await login("test");
-
-			// await SecureStore.setItemAsync(
-			// 	"access_token",
-			//	response.data.access
-			// );
-			// await SecureStore.setItemAsync(
-			// 	"refresh_token",
-			// 	response.data.refresh
-			// );
+			await login(response.data.access, response.data.refresh);
 
 			router.replace("/");
 		} catch (err) {

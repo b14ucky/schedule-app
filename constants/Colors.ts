@@ -7,4 +7,5 @@ export const colors = {
 	teal: "#00ADB5",
 	whiteish: "#EEEEEE",
 	white: "#F7F7F7",
+	darkerGreen: "#4C9A4E",
 };

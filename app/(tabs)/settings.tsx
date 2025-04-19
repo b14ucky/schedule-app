@@ -10,7 +10,7 @@ import { shadows } from "@/constants/Shadows";
 import { useAuth } from "@/contexts/AuthContext";
 
 export default function Settings() {
-	const { logout } = useAuth();
+	const { user, logout } = useAuth();
 	return (
 		<SafeAreaProvider>
 			<SafeAreaView style={styles.container}>
@@ -20,8 +20,15 @@ export default function Settings() {
 				<View style={[styles.userContainer, shadows.lightShadow]}>
 					<Ionicons name={"person"} size={50} />
 					<View>
-						<Text style={styles.userName}>Dominik Meisner</Text>
-						<Text style={styles.email}>meisnerd2003@gmail.com</Text>
+						<Text
+							style={styles.userName}
+							numberOfLines={1}
+							adjustsFontSizeToFit
+						>
+							{/* it works for now, one day I'm gonna make it better I promise */}
+							{`${user?.first_name} ${user?.last_name}          `}
+						</Text>
+						<Text style={styles.email}>{user?.email}</Text>
 					</View>
 				</View>
 				<ScrollView

@@ -1,31 +1,38 @@
 import React from "react";
 import { View, FlatList, StyleSheet } from "react-native";
 import ListElement from "./ShiftListItem";
-
-type Shift = {
-	id: string;
-	dayOfMonth: number;
-	dayOfWeek: string;
-	shiftHours: string;
-};
+import { Shift } from "@/components/ui/ShiftDetails";
 
 type Props = {
 	data: Shift[];
+	onRefresh: () => void;
+	refreshing: boolean;
+	onPress: (item: Shift) => void;
 };
 
-export default function ShiftList({ data }: Props) {
+export default function ShiftList({
+	data,
+	onRefresh,
+	refreshing,
+	onPress,
+}: Props) {
 	return (
 		<FlatList
+			showsVerticalScrollIndicator={false}
 			data={data}
-			keyExtractor={(item) => item.id}
+			onRefresh={onRefresh}
+			refreshing={refreshing}
+			keyExtractor={(item) => item.id.toString()}
 			renderItem={({ item }) => (
 				<ListElement
-					dayOfMonth={item.dayOfMonth}
-					dayOfWeek={item.dayOfWeek}
-					shiftHours={item.shiftHours}
+					date={item.date}
+					time_start={item.time_start}
+					time_end={item.time_end}
+					day_type={item.day_type}
+					additional_info={item.additional_info}
+					onPress={() => onPress(item)}
 				/>
 			)}
-			// ItemSeparatorComponent={() => <View style={styles.separator} />}
 			contentContainerStyle={styles.container}
 		/>
 	);
