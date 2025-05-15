@@ -26,8 +26,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 	useEffect(() => {
 		const loadToken = async () => {
 			const token = await SecureStore.getItemAsync("access_token");
-			if (token) setIsAuthenticated(true);
-			else setIsAuthenticated(false);
+			if (token) {
+				setIsAuthenticated(true);
+				setUser(getUserFromToken(token));
+			}
 		};
 		loadToken();
 	}, []);

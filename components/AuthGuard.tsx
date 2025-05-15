@@ -14,6 +14,7 @@ export default function AuthGuard({ children }: { children: ReactNode }) {
 	}, []);
 
 	useEffect(() => {
+		if (!mounted) return;
 		if (!isAuthenticated) {
 			InteractionManager.runAfterInteractions(() => {
 				router.replace("/login");
@@ -23,7 +24,7 @@ export default function AuthGuard({ children }: { children: ReactNode }) {
 		}
 	}, [isAuthenticated]);
 
-	if (checking) {
+	if (checking && !mounted) {
 		return (
 			<View
 				style={{
