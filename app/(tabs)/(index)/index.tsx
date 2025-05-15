@@ -29,7 +29,6 @@ export default function Index() {
 
 	const shiftDetailsRef = useRef<ShiftDetailsRef>(null);
 	const handlePress = (shift: Shift) => {
-		console.log("test");
 		shiftDetailsRef.current?.open(shift);
 	};
 
