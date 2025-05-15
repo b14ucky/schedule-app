@@ -1,9 +1,11 @@
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
 
+// todo change the baseURL after deplyoing the backend
+export const baseURL = "http://192.168.0.166:8000";
+
 const api = axios.create({
-	// todo change the baseURL after deplyoing the backend
-	baseURL: "http://192.168.0.166:8000",
+	baseURL: baseURL,
 });
 
 let logoutCallback: (() => void) | null = null;
@@ -23,12 +25,9 @@ api.interceptors.response.use(
 			try {
 				const refresh = await SecureStore.getItemAsync("refresh_token");
 
-				const res = await axios.post(
-					"http://192.168.0.166:8000/auth/token/refresh/",
-					{
-						refresh,
-					}
-				);
+				const res = await axios.post(`${baseURL}/auth/token/refresh/`, {
+					refresh,
+				});
 
 				const newAccess = res.data.access;
 				const newRefresh = res.data.refresh;

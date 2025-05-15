@@ -7,9 +7,17 @@ import { Feather } from "@expo/vector-icons";
 import axios from "axios";
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { StyleSheet, View, KeyboardAvoidingView, Platform } from "react-native";
+import {
+	StyleSheet,
+	View,
+	KeyboardAvoidingView,
+	Platform,
+	Text,
+} from "react-native";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import { useAuth } from "@/contexts/AuthContext";
+import { baseURL } from "@/lib/api";
+import ErrorAlert from "@/components/ui/ErrorAlert";
 
 export default function LoginScreen() {
 	const [email, setEmail] = useState("");
@@ -21,19 +29,25 @@ export default function LoginScreen() {
 
 	const handleLogin = async () => {
 		try {
-			const response = await axios.post(
-				"http://192.168.0.166:8000/auth/token/",
-				{
-					email,
-					password,
-				}
-			);
+			const response = await axios.post(`${baseURL}/auth/token/`, {
+				email,
+				password,
+			});
 
 			await login(response.data.access, response.data.refresh);
 
 			router.replace("/");
-		} catch (err) {
-			setError(`Error: ${err}`);
+		} catch (err: any) {
+			switch (err.status) {
+				case 400:
+					setError("Uzupełnij wszystkie pola.");
+					break;
+				case 401:
+					setError("Niepoprawny adres e-mail lub hasło.");
+					break;
+				default:
+					setError("Nieznany błąd.");
+			}
 		}
 	};
 
@@ -69,6 +83,7 @@ export default function LoginScreen() {
 							secureTextEntry={true}
 							autoComplete={"password"}
 						/>
+						{error ? <ErrorAlert error={error} /> : <></>}
 						<Button
 							text={"Zaloguj"}
 							Icon={Feather}
