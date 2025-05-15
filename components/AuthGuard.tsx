@@ -7,14 +7,8 @@ export default function AuthGuard({ children }: { children: ReactNode }) {
 	const router = useRouter();
 	const [checking, setChecking] = useState(true);
 	const { isAuthenticated } = useAuth();
-	const [mounted, setMounted] = useState(false);
 
 	useEffect(() => {
-		setMounted(true);
-	}, []);
-
-	useEffect(() => {
-		if (!mounted) return;
 		if (!isAuthenticated) {
 			InteractionManager.runAfterInteractions(() => {
 				router.replace("/login");
@@ -24,7 +18,7 @@ export default function AuthGuard({ children }: { children: ReactNode }) {
 		}
 	}, [isAuthenticated]);
 
-	if (checking && !mounted) {
+	if (checking) {
 		return (
 			<View
 				style={{
