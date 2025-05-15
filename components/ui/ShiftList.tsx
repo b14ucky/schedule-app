@@ -1,7 +1,8 @@
 import React from "react";
-import { View, FlatList, StyleSheet } from "react-native";
+import { Text, FlatList, StyleSheet } from "react-native";
 import ListElement from "./ShiftListItem";
 import { Shift } from "@/components/ui/ShiftDetails";
+import { colors } from "@/constants/Colors";
 
 type Props = {
 	data: Shift[];
@@ -23,6 +24,11 @@ export default function ShiftList({
 			onRefresh={onRefresh}
 			refreshing={refreshing}
 			keyExtractor={(item) => item.id.toString()}
+			ListEmptyComponent={
+				<Text style={styles.listEmptyText}>
+					{"Wolne jak nigdy! Na razie brak zaplanowanych dni."}
+				</Text>
+			}
 			renderItem={({ item }) => (
 				<ListElement
 					date={item.date}
@@ -43,7 +49,12 @@ const styles = StyleSheet.create({
 		paddingVertical: 10,
 		alignItems: "center",
 	},
-	separator: {
-		height: 10,
+	listEmptyText: {
+		color: colors.black,
+		fontSize: 16,
+		padding: 30,
+		marginTop: 20,
+		textAlign: "center",
+		fontWeight: 500,
 	},
 });
