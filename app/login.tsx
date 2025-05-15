@@ -7,13 +7,7 @@ import { Feather } from "@expo/vector-icons";
 import axios from "axios";
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import {
-	StyleSheet,
-	View,
-	KeyboardAvoidingView,
-	Platform,
-	Text,
-} from "react-native";
+import { StyleSheet, View, KeyboardAvoidingView, Platform } from "react-native";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import { useAuth } from "@/contexts/AuthContext";
 import { baseURL } from "@/lib/api";
